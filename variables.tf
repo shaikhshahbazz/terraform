@@ -1,8 +1,5 @@
-variable "filename" {
-   default = "animal.txt"
-type = string
-}
-variable "content" {
-  default = "hello this is shahbazz"
-type = string
+variable "aws_region" {
+  description = "AWS region"
+  type        = string
+  default     = "us-east-1"
 }
