@@ -8,7 +8,7 @@ pipeline {
     }
 
     stages {
-        STAGE('Checkout SCM') {
+        stage('Checkout SCM') {
             steps {
                 git branch: 'main', url: 'https://github.com/shaikhshahbazz/terraform.git'
             }
