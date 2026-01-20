@@ -1,17 +1,23 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
+
 provider "aws" {
-region = "us-east-1"
+  region = var.aws_region
 }
 
-resource "aws_iam_user" "admin_user" {
-name = "shahbazz"
-
-tags = {
-description = "Technical Team Lead"
-}
+# IAM User
+resource "aws_iam_user" "shahbazz" {
+  name = "shahbazz-user"
 }
 
+# Attach AmazonS3FullAccess (correct ARN)
 resource "aws_iam_user_policy_attachment" "shahbazz_s3_full_access" {
-user = aws_iam_user.admin_user.name
-policy_arn = "arn:aws:iam:aws:policy/AmazonS3FullAccess"
+  user       = aws_iam_user.shahbazz.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
-
