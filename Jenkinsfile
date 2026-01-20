@@ -2,21 +2,20 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        AWS_DEFAULT_REGION = "us-east-1"
+        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     }
 
     stages {
-        stage('Checkout SCM') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/shaikhshahbazz/terraform.git'
+                checkout scm
             }
         }
 
-        stage('List Files') {
+        stage('Terraform Version') {
             steps {
-                sh 'pwd && ls -la'
+                sh 'terraform -version'
             }
         }
 
@@ -39,6 +38,3 @@ pipeline {
         }
     }
 }
-
-    
-
